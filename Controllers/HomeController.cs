@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using ChefsNDishes.Models;
 
 namespace ChefsNDishes.Controllers;
@@ -23,14 +24,14 @@ public class HomeController : Controller
     [HttpGet("chefs")]
     public IActionResult Chefs()
     {   
-        List<Chef> AllChefs = _context.Chefs.OrderBy(c=>c.FirstName).ToList();
+        List<Chef> AllChefs = _context.Chefs.Include(c=>c.Dishes).OrderBy(c=>c.FirstName).ToList();
         return View(AllChefs);
     }
 
     [HttpGet("dishes")]
     public IActionResult Dishes()
     {
-        List<Dish> AllDishes = _context.Dishes.OrderBy(c=>c.Name).ToList();
+        List<Dish> AllDishes = _context.Dishes.Include(c=>c.Creator).OrderBy(c=>c.Name).ToList();
         return View(AllDishes);
     }
 

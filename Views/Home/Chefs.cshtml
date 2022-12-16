@@ -1,11 +1,12 @@
 ﻿@model List<Chef>
 <div class="text-center">
-    <h3>Check out these Our Chefs</h3>
+    <h3>Check out our roster of Chefs</h3>
 
     <table class="table">
 
         <tr>
             <th>Name</th>
+            <th>Age</th>
             <th># of Dishes</th>
         </tr>
 
@@ -13,7 +14,8 @@
         {
         <tr>
             <td>@c.FirstName @c.LastName</td>
-            <td> idk</td>
+            <td>@(DateTime.Now.Year - @c.DOB.Year)</td>
+            <td>@c.Dishes.Count()</td>
         </tr>
         }
 
